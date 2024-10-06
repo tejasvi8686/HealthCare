@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -8,7 +9,8 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-import { cn } from "@/lib/utlis";
+import { cn } from "@/lib/utils";
+
 
 export const metadata: Metadata = {
   title: "Care Plus",
@@ -29,7 +31,12 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
