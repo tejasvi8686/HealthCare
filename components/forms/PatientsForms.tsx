@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
+import { useRouter } from "next/navigation";
+
 export enum FormFieldType {
   INPUT = "input",
   TEXTAREA = "textarea",
@@ -19,37 +21,46 @@ export enum FormFieldType {
   SKELETON = "skeleton",
 }
 
-
-
 const PatientsForms = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-       name: "",
-       email: "",
-       phone: "",
+      name: "",
+      email: "",
+      phone: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(email: any, name: any, phone: z.infer<typeof UserFormValidation>) {
-   setIsLoading(true);
+  function onSubmit({
+    name,
+    email,
+    phone,
+  }: z.infer<typeof UserFormValidation>) {
+    setIsLoading(true);
 
-   try {
-    // const userData = { name, email, phone };
+    try {
+      // const userData = {
+      //   name,
+      //   email,
+      //   phone,
+      // };
 
-    // const user = await createUser(userData)
+      // const user = await createUser(userData);
 
-    
+      // if (user) {
+      //   router.push(`/patients/${user.$id}/register`);
+      // }
 
-   } catch (error) {
-     console.log(error);
-   }
+    } catch (error) {
+      console.log(error);
+    }
 
-   setIsLoading(false);
+    setIsLoading(false);
   }
   return (
     <Form {...form}>
