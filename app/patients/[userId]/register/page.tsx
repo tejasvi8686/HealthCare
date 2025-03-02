@@ -1,9 +1,7 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
-
-//import RegisterForm from "@/components/forms/RegisterForm";
+import RegisterForm from "@/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
-
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId);
   const patient = await getPatient(userId);
@@ -21,7 +19,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             className="mb-12 h-10 w-fit"
           />
 
-          {/* <RegisterForm user={user} /> */}
+          <RegisterForm user={user} />
 
           <p className="copyright py-12">© 2024 CarePluse</p>
         </div>
@@ -32,10 +30,10 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
         height={1000}
         width={1000}
         alt="patient"
-        className="side-img max-w-[390px]"
+        className="side-img max-w-[590px]"
       />
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
