@@ -85,7 +85,11 @@ const RegisterForm = ({ user }: { user: User }) => {
         privacyConsent: values.privacyConsent,
       };
 
+      console.log("patient", patient);
+
       const newPatient = await registerPatient(patient);
+
+      console.log("newPatient", newPatient);
 
       if (newPatient) {
         router.push(`/patients/${user.$id}/new-appointment`);
@@ -124,7 +128,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             iconAlt="user"
           />
 
-          {/* EMAIL & PHONE */}
+
           <div className="flex flex-col gap-6 xl:flex-row">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
