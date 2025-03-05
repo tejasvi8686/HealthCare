@@ -25,6 +25,7 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import { FileUploader } from "../FileUploader";
 import SubmitButton from "../SubmitButton";
+import { log } from "console";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -41,6 +42,8 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
+    console.log("trigger");
+    console.log("values", values);
     setIsLoading(true);
 
     // Store file info in form data as
@@ -48,10 +51,13 @@ const RegisterForm = ({ user }: { user: User }) => {
     if (
       values.identificationDocument &&
       values.identificationDocument?.length > 0
+      
     ) {
       const blobFile = new Blob([values.identificationDocument[0]], {
         type: values.identificationDocument[0].type,
       });
+
+      console.log("blobFile", blobFile);
 
       formData = new FormData();
       formData.append("blobFile", blobFile);
@@ -85,17 +91,17 @@ const RegisterForm = ({ user }: { user: User }) => {
         privacyConsent: values.privacyConsent,
       };
 
-      console.log("patient", patient);
+      //console.log("patient", patient);
 
-      const newPatient = await registerPatient(patient);
+      //const newPatient = await registerPatient(patient);
 
-      console.log("newPatient", newPatient);
+     //console.log("newPatient", newPatient);
 
-      if (newPatient) {
+      if (patient) {
         router.push(`/patients/${user.$id}/new-appointment`);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error);z
     }
 
     setIsLoading(false);
